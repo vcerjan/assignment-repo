@@ -1,0 +1,51 @@
+<h2>Create a Transformer!</h2>
+    <div>
+        <label>name: </label>
+        <input [(ngModel)]="transformer.name"/>
+    </div>
+    <div>
+        <label>faction: </label>
+        <select [(ngModel)]="transformer.faction" name="faction">
+            <option *ngFor="let fac of factions" [value]="fac.id">{{fac.name}}</option>
+        </select>
+    </div>
+    <div>
+        <label>vehicle group: </label>
+        <select [(ngModel)]="transformer.vehicleGroup" name="vehicleGroup">
+            <option *ngFor="let group of vehicleGroups" [value]="group">{{group}}</option>
+        </select>
+    </div>
+    <div>
+        <label>vehicle type: </label>
+        <select [(ngModel)]="transformer.vehicleType" name="vehicleType">
+            <option *ngFor="let type of filterVehicleTypes(vehicleTypes)" [value]="type">{{type}}</option>
+        </select>
+    </div>
+    <div>
+        <label>vehicle model: </label>
+        <select [(ngModel)]="transformer.vehicleModel" name="vehicleModel">
+                <option *ngFor="let model of filterVehicleModels(vehicleModels)" [value]="model">{{model}}</option>
+        </select>
+    </div>
+    <div>
+        <label>gear: </label>
+        <ul>
+            <li *ngFor="let g of transformer.gear; let i = index">
+                {{g}}
+                <button (click)="removeGear($event.target)" [attr.data-index]="i">-</button>
+            </li>
+            <li>
+                <select name="gear-select" (change)="selectGear($event.target)">
+                    <option *ngFor="let g of gear" [value]="g">{{g}}</option>
+                </select>
+                <button (click)="addSelectedGear()">+</button>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <label>status: </label>{{transformer.status}}
+        <select [(ngModel)]="transformer.status">
+            <option *ngFor="let s of status" [ngValue]="s">{{s}}</option>
+        </select>
+    </div>
+<button (click)="create()">Create</button>

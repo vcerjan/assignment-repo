@@ -1,0 +1,24 @@
+<h2>My Transformers</h2>
+<div>
+        
+    <h3>Search transformers by name:</h3>
+    <input type="text" [(ngModel)]="term"/>
+</div>
+<ul class="transformers">
+    <li *ngFor="let transformer of filterTransformers(transformers, term, selectedFaction)" 
+        [class.selected]="transformer === selectedTransformer"
+        (click)="onSelect(transformer)">
+        <span class="badge">{{transformer.id}}</span> {{transformer.name}}
+    </li>
+</ul>
+
+<div *ngIf="selectedTransformer">
+    <h2>{{selectedTransformer.name}} is a {{selectedTransformer.faction == 0 ? 'Autobots' : 'Decepticons'}} member!</h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>
+<div>
+    <select [(ngModel)]="selectedFaction">
+        <option *ngFor="let fac of factions" [value]="fac.name">{{fac.name}}</option>
+    </select>
+    <!--<button (click)="filterByFactions(myFactions)">Apply Filter</button>-->
+</div>
